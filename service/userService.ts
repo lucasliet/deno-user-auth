@@ -6,12 +6,20 @@ export default {
     const passwordHash = hash(password);
     return await userRepository.register(user, passwordHash);
   },
+  async updatePassword(user: string, password: string) {
+    if (await this.login(user, password)) {
+      const passwordHash = hash(password);
+      return await userRepository.updatePassword(user, passwordHash);
+    } else {
+      return false;
+    }
+  },
   login: async (user: string, password: string) => {
     const passwordHash = await userRepository.login(user);
     return passwordHash ? verify(password, passwordHash) : false;
   },
   async unregister(user: string, password: string) {
-    if(await this.login(user, password)) {
+    if (await this.login(user, password)) {
       return userRepository.unregister(user);
     } else {
       return false;

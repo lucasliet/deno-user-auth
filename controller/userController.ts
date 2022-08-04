@@ -10,7 +10,22 @@ export default {
         res.json({ message: `user ${user} registered sucessfully` });
       }
       res.status = 400;
-      res.json({ message: 'no user was persisted!' });
+      res.json({ message: 'no user was registered!' });
+    } catch (err) {
+      console.error(err);
+      res.status = 500;
+      res.json({ error: err?.message ?? err });
+    }
+  },
+  updatePassword: async (req: OpineRequest, res: OpineResponse) => {
+    const { user, password } = req.body;
+    try {
+      if (await userService.updatePassword(user, password)) {
+        res.status = 200;
+        res.json({ message: `user ${user} password updated sucessfully` });
+      }
+      res.status = 400;
+      res.json({ message: 'no user was updated!' });
     } catch (err) {
       console.error(err);
       res.status = 500;
@@ -36,8 +51,8 @@ export default {
     const { user, password } = req.body;
     try {
       if (await userService.unregister(user, password)) {
-        res.status = 204;
-        res.send();
+        res.status = 200;
+        res.json({ message: `user ${user} unregistered sucessfully` });
       }
       res.status = 400;
       res.json({ message: 'user or password invalid!' });

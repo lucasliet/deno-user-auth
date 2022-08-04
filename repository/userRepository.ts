@@ -8,6 +8,13 @@ export default {
 
     return redis.hset(user, { passwordHash });
   },
+  updatePassword: async (user: string, passwordHash: string) => {
+    const persistedPassHash: string | null = await redis.hget(user, 'passwordHash');
+
+    if (!persistedPassHash) throw Error('user doesn\'t exists');
+
+    return redis.hset(user, { passwordHash });
+  },
   login: (user: string): Promise<string | null> => redis.hget(user, 'passwordHash'),
   unregister: (user: string) => redis.del(user)
 }
