@@ -8,7 +8,7 @@ export default {
   },
   login: async (user: string, password: string) => {
     const passwordHash = await userRepository.login(user);
-    return verify(password, passwordHash ?? '');
+    return passwordHash ? verify(password, passwordHash) : false;
   },
   async unregister(user: string, password: string) {
     if(await this.login(user, password)) {
