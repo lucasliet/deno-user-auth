@@ -1,16 +1,12 @@
 import redis from '../config/redisConfig.ts';
 
-interface UserData {
-  passwordHash: string,
-}
-
 export default {
   register: async (user: string, passwordHash: string) => {
-    const persistedPassHash: UserData | null = await redis.get(user);
+    const persistedPassHash: string | null = await redis.hget(user, 'passwordHash');
 
     if (persistedPassHash) throw Error('user already exists');
 
     return redis.hset(user, { passwordHash });
   },
-  login: (user: string): Promise<UserData | null> => redis.get(user)
+  login: (user: string): Promise<string | null> => redis.hget(user, 'passwordHash')
 }

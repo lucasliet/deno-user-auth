@@ -8,7 +8,7 @@ export default {
     return { message: `user ${user} registered sucessfully` };
   },
   login: async (user: string, password: string) => {
-    const persistedUser = await userRepository.login(user);
-    return verify(password, persistedUser?.passwordHash ?? '');
+    const passwordHash = await userRepository.login(user);
+    return verify(password, passwordHash ?? '');
   }
 }
