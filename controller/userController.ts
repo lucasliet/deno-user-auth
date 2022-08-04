@@ -8,6 +8,7 @@ export default {
       res.status = 201;
       res.json(await userService.register(user, password));
     } catch (err) {
+      console.error(err);
       res.status = 500;
       res.send(err?.message ?? err);
     }
@@ -23,6 +24,7 @@ export default {
       res.status = 400;
       res.json({ message: 'user or password invalid!' });
     } catch (err) {
+      console.error(err);
       res.status = 500;
       res.send(err?.message ?? err);
     }

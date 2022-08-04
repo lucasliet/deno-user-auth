@@ -5,7 +5,7 @@ const app = opine();
 
 app.use(json());
 
-app.get('/', (_, res) => res.json({ message: 'welcome!' }))
+app.get('/', (_, res) => res.json({ message: 'welcome!' }));
 
 app.post('/register', userController.register);
 app.post('/login', userController.login);
