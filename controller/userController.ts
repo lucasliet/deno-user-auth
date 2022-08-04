@@ -4,29 +4,47 @@ import userService from '../service/userService.ts';
 export default {
   register: async (req: OpineRequest, res: OpineResponse) => {
     const { user, password } = req.body;
-    if (await userService.register(user, password)) {
-      res.status = 201;
-      res.json({ message: `user ${user} registered sucessfully` });
+    try {
+      if(await userService.register(user, password)){
+        res.status = 201;
+        res.json({ message: `user ${user} registered sucessfully` });
+      }
+      res.status = 400;
+      res.json({ message: 'no user was persisted!' });
+    } catch (err) {
+      console.error(err);
+      res.status = 500;
+      res.send(err?.message ?? err);
     }
-    res.status = 400;
-    res.json({ message: 'no user was persisted!' });
   },
   login: async (req: OpineRequest, res: OpineResponse) => {
     const { user, password } = req.body;
-    if (await userService.login(user, password)) {
-      res.status = 204;
-      res.send();
+    try {
+      if (await userService.login(user, password)) {
+        res.status = 204;
+        res.send();
+      }
+      res.status = 400;
+      res.json({ message: 'user or password invalid!' });
+    } catch (err) {
+      console.error(err);
+      res.status = 500;
+      res.send(err?.message ?? err);
     }
-    res.status = 400;
-    res.json({ message: 'user or password invalid!' });
   },
   unregister: async (req: OpineRequest, res: OpineResponse) => {
     const { user, password } = req.body;
-    if (await userService.unregister(user, password)) {
-      res.status = 204;
-      res.send();
+    try {
+      if (await userService.unregister(user, password)) {
+        res.status = 204;
+        res.send();
+      }
+      res.status = 400;
+      res.json({ message: 'user or password invalid!' });
+    } catch (err) {
+      console.error(err);
+      res.status = 500;
+      res.send(err?.message ?? err);
     }
-    res.status = 400;
-    res.json({ message: 'user or password invalid!' });
   }
 }
