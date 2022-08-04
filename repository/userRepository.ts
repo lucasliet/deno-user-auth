@@ -1,9 +1,4 @@
-import { Redis } from "https://deno.land/x/upstash_redis@v1.11.0/mod.ts";
-
-const redis = new Redis({
-  url: Deno.env.get('UPSTASH_REDIS_REST_URL') ?? '',
-  token: Deno.env.get('UPSTASH_REDIS_REST_TOKEN') ?? '',
-})
+import redis from '../config/redisConfig.ts';
 
 interface UserData {
   passwordHash: string,
@@ -15,12 +10,7 @@ export default {
 
     if (persistedPassHash) throw Error('user already exists');
 
-    return await redis.hset(user, { passwordHash });
+    return redis.hset(user, { passwordHash });
   },
-
-  login: async (user: string, passwordHash: string) => {
-    const persistedPassHash: UserData | null = await redis.get(user);
-
-    return persistedPassHash?.passwordHash === passwordHash ? true : false;
-  }
+  login: (user: string): Promise<UserData | null> => redis.get(user)
 }
