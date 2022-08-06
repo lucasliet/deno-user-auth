@@ -6,11 +6,11 @@ export default {
     const passwordHash = hash(password);
     return await userRepository.register(user, passwordHash);
   },
-  async updatePassword(user: string, password: string) {
+  async updatePassword(user: string, password: string, newPassword: string) {
     if (await this.login(user, password)) {
-      console.info(`user ${user} found, updating password`);
-      const passwordHash = hash(password);
-      return await userRepository.updatePassword(user, passwordHash);
+      const passwordHash = hash(newPassword);
+      await userRepository.updatePassword(user, passwordHash);
+      return true;
     } else {
       console.info(`user ${user} not found or password is incorrect`);
       return false;

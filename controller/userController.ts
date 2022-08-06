@@ -18,9 +18,9 @@ export default {
     }
   },
   updatePassword: async (req: OpineRequest, res: OpineResponse) => {
-    const { user, password } = req.body;
+    const { user, password, newPassword } = req.body;
     try {
-      if (await userService.updatePassword(user, password)) {
+      if (await userService.updatePassword(user, password, newPassword)) {
         res.status = 200;
         res.json({ message: `user ${user} password updated sucessfully` });
       }
