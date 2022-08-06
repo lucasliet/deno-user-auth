@@ -32,7 +32,7 @@ resources:
     parentId: null
     modified: 1659749123501
     created: 1659749123501
-    name: deno-middleware
+    name: deno-user-auth
     description: ""
     scope: collection
     _type: workspace
@@ -170,7 +170,7 @@ resources:
     created: 1659749123517
     name: Base Environment
     data:
-      baseUrl: https://deno-middleware.deno.dev
+      baseUrl: https://user-auth.deno.dev
     dataPropertyOrder:
       "&":
         - baseUrl
@@ -189,7 +189,7 @@ resources:
     parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
     modified: 1659749123513
     created: 1659749123513
-    fileName: deno-middleware
+    fileName: deno-user-auth
     contents: ""
     contentType: yaml
     _type: api_spec
@@ -199,7 +199,7 @@ resources:
     created: 1659805194691
     name: Production
     data:
-      baseUrl: https://deno-middleware.deno.dev
+      baseUrl: https://user-auth.deno.dev
     dataPropertyOrder:
       "&":
         - baseUrl
