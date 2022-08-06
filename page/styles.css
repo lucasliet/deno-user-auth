@@ -1,0 +1,31 @@
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #222522;
+  color: white;
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #333833;
+  height: 45%;
+  width: 100%;
+  text-align: center;
+}
+
+a {
+  color: aquamarine;
+  text-decoration: none;
+}
