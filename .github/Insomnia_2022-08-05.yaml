@@ -1,0 +1,160 @@
+_type: export
+__export_format: 4
+__export_date: 2022-08-06T01:41:27.475Z
+__export_source: insomnia.desktop.app:v2022.5.0
+resources:
+  - _id: req_0cb3ca1c67234b339257cfc6875ccea1
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659750013514
+    created: 1659749688440
+    url: https://deno-middleware.deno.dev/login
+    name: login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"user": "teste",
+        	"password": "test"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c6e8c294e70840d58fcc95f43f859942
+    authentication: {}
+    metaSortKey: -1659749688440
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    parentId: null
+    modified: 1659749123501
+    created: 1659749123501
+    name: deno-middleware
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_f4c7a45b824148b6af53223621916742
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659750013094
+    created: 1659749127025
+    url: https://deno-middleware.deno.dev/register
+    name: register
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"user": "teste",
+        	"password": "test"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_98dc8104f7594d13ae6d0ba5cc4ad8bd
+    authentication: {}
+    metaSortKey: -1659749127025
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_440a8b4ff34547aba2e1b6b1443e626a
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659750012652
+    created: 1659749992212
+    url: https://deno-middleware.deno.dev/unregister
+    name: register
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"user": "teste",
+        	"password": "teste"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_98dc8104f7594d13ae6d0ba5cc4ad8bd
+    authentication: {}
+    metaSortKey: -1659737192832.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1307d8e23509470cbeec4c53147b3ee0
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659750011586
+    created: 1659749255531
+    url: https://deno-middleware.deno.dev/update_password
+    name: update
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"user": "teste",
+        	"password": "teste",
+        	"newPassword":"test3"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_98dc8104f7594d13ae6d0ba5cc4ad8bd
+    authentication: {}
+    metaSortKey: -1659725258640
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_ea542020731700e63f34ca040262ba4be389ccf9
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659749123517
+    created: 1659749123517
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1659749123517
+    _type: environment
+  - _id: jar_ea542020731700e63f34ca040262ba4be389ccf9
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659749123519
+    created: 1659749123519
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_0a120342d9524be0b45d96ee5ab0a213
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659749123513
+    created: 1659749123513
+    fileName: deno-middleware
+    contents: ""
+    contentType: yaml
+    _type: api_spec
