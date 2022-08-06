@@ -76,7 +76,7 @@ resources:
     modified: 1659750012652
     created: 1659749992212
     url: https://deno-middleware.deno.dev/unregister
-    name: register
+    name: unregister
     description: ""
     method: POST
     body:
@@ -84,7 +84,7 @@ resources:
       text: |-
         {
         	"user": "teste",
-        	"password": "teste"
+        	"password": "test"
         }
     parameters: []
     headers:
@@ -114,7 +114,7 @@ resources:
       text: |-
         {
         	"user": "teste",
-        	"password": "teste",
+        	"password": "test",
         	"newPassword":"test3"
         }
     parameters: []
