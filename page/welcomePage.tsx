@@ -16,7 +16,7 @@ function WelcomePage() {
       <body>
         <main>
           <h1>To start please check the Insomnia template at <a href="https://github.com/lucasliet/deno-middleware">our Github Page</a></h1>
-          <h2>or download it <a href="insomnia://app/import?uri=https://raw.githubusercontent.com/lucasliet/deno-middleware/master/.github/Insomnia_2022-08-06.yaml">here</a></h2>
+          <h2>or import it <a href="insomnia://app/import?uri=https://raw.githubusercontent.com/lucasliet/deno-middleware/master/.github/Insomnia_2022-08-06.yaml">here</a></h2>
         </main>
       </body>
     </html>
