@@ -40,7 +40,7 @@ export default {
     try {
       if (await userService.login(user, password)) {
         res.status = 200;
-        res.json({ access_key: await createUserToken(user)});
+        res.json(await createUserToken(user));
       }
       res.status = 400;
       res.json({ message: 'user or password invalid!' });
