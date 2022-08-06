@@ -14,7 +14,7 @@ export const createUserToken = async (user: string) =>
   expires_in: ONE_HOUR,
   access_token: await create(
     { alg: 'HS512', typ: 'JWT' },
-    { exp: ONE_HOUR, user },
+    { exp: ONE_HOUR, user, generationId: crypto.randomUUID() },
     JWS_SECRET_TOKEN
   )
 });

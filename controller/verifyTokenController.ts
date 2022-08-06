@@ -8,6 +8,7 @@ export default {
     const expires_in =
       verifyTokenService.getTokenExpirationSeconds(tokenPayload.exp);
     delete tokenPayload.exp;
+    delete tokenPayload.generationId;
     res.json({ expires_in, ...tokenPayload });
   }
 }
