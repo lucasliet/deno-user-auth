@@ -1,13 +1,45 @@
 _type: export
 __export_format: 4
-__export_date: 2022-08-06T01:41:27.475Z
+__export_date: 2022-08-06T05:12:11.489Z
 __export_source: insomnia.desktop.app:v2022.5.0
 resources:
+  - _id: req_2330f1607c1d4fdf855b803660bdcfb0
+    parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    modified: 1659762701655
+    created: 1659762668226
+    url: "{{ _.baseUrl }}/verify_token"
+    name: verify token
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTk4NDc5OTAsInVzZXIiOiJ0ZXN0ZSJ9.ndMccytjgX_BEmVTUrf_TK1LLoUblxFq1NuBaUwNuTkhG-VzzQ_6eB8wVntqvzjlsywV9ozvdY5sO6fuW4G4rw
+      prefix: Bearer
+    metaSortKey: -1659762668226
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_49308d21ad9b42f0b006bd5a61ba0f59
+    parentId: null
+    modified: 1659749123501
+    created: 1659749123501
+    name: deno-middleware
+    description: ""
+    scope: collection
+    _type: workspace
   - _id: req_0cb3ca1c67234b339257cfc6875ccea1
     parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
-    modified: 1659750013514
+    modified: 1659762116894
     created: 1659749688440
-    url: https://deno-middleware.deno.dev/login
+    url: "{{ _.baseUrl }}/login"
     name: login
     description: ""
     method: POST
@@ -33,19 +65,11 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: wrk_49308d21ad9b42f0b006bd5a61ba0f59
-    parentId: null
-    modified: 1659749123501
-    created: 1659749123501
-    name: deno-middleware
-    description: ""
-    scope: collection
-    _type: workspace
   - _id: req_f4c7a45b824148b6af53223621916742
     parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
-    modified: 1659750013094
+    modified: 1659762124228
     created: 1659749127025
-    url: https://deno-middleware.deno.dev/register
+    url: "{{ _.baseUrl }}/register"
     name: register
     description: ""
     method: POST
@@ -73,9 +97,9 @@ resources:
     _type: request
   - _id: req_440a8b4ff34547aba2e1b6b1443e626a
     parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
-    modified: 1659750012652
+    modified: 1659762125077
     created: 1659749992212
-    url: https://deno-middleware.deno.dev/unregister
+    url: "{{ _.baseUrl }}/unregister"
     name: unregister
     description: ""
     method: POST
@@ -83,15 +107,17 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"user": "teste",
-        	"password": "test"
+        	"user": "teste"
         }
     parameters: []
     headers:
       - name: Content-Type
         value: application/json
         id: pair_98dc8104f7594d13ae6d0ba5cc4ad8bd
-    authentication: {}
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTk4NDc5OTAsInVzZXIiOiJ0ZXN0ZSJ9.ndMccytjgX_BEmVTUrf_TK1LLoUblxFq1NuBaUwNuTkhG-VzzQ_6eB8wVntqvzjlsywV9ozvdY5sO6fuW4G4rw
+      prefix: Bearer
     metaSortKey: -1659737192832.5
     isPrivate: false
     settingStoreCookies: true
@@ -103,9 +129,9 @@ resources:
     _type: request
   - _id: req_1307d8e23509470cbeec4c53147b3ee0
     parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
-    modified: 1659750011586
+    modified: 1659762682106
     created: 1659749255531
-    url: https://deno-middleware.deno.dev/update_password
+    url: "{{ _.baseUrl }}/update_password"
     name: update
     description: ""
     method: PUT
@@ -114,15 +140,18 @@ resources:
       text: |-
         {
         	"user": "teste",
-        	"password": "test",
-        	"newPassword":"test3"
+        	"password": "test3"
         }
     parameters: []
     headers:
       - name: Content-Type
         value: application/json
         id: pair_98dc8104f7594d13ae6d0ba5cc4ad8bd
-    authentication: {}
+    authentication:
+      type: bearer
+      prefix: Bearer
+      token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTk4NDc5OTAsInVzZXIiOiJ0ZXN0ZSJ9.ndMccytjgX_BEmVTUrf_TK1LLoUblxFq1NuBaUwNuTkhG-VzzQ_6eB8wVntqvzjlsywV9ozvdY5sO6fuW4G4rw
+      disabled: false
     metaSortKey: -1659725258640
     isPrivate: false
     settingStoreCookies: true
@@ -134,11 +163,14 @@ resources:
     _type: request
   - _id: env_ea542020731700e63f34ca040262ba4be389ccf9
     parentId: wrk_49308d21ad9b42f0b006bd5a61ba0f59
-    modified: 1659749123517
+    modified: 1659762134498
     created: 1659749123517
     name: Base Environment
-    data: {}
-    dataPropertyOrder: null
+    data:
+      baseUrl: deno-middleware.deno.dev
+    dataPropertyOrder:
+      "&":
+        - baseUrl
     color: null
     isPrivate: false
     metaSortKey: 1659749123517

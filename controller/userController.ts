@@ -1,6 +1,6 @@
 import { OpineRequest, OpineResponse } from 'https://deno.land/x/opine@2.2.0/mod.ts';
 import userService from '../service/userService.ts';
-import { createUserToken } from '../config/authKey.ts';
+import { createUserToken } from '../config/authConfig.ts';
 
 export default {
   register: async (req: OpineRequest, res: OpineResponse) => {
@@ -18,6 +18,7 @@ export default {
       res.json({ error: err?.message ?? err });
     }
   },
+  
   updatePassword: async (req: OpineRequest, res: OpineResponse) => {
     const { user, password } = req.body;
     try {
@@ -33,6 +34,7 @@ export default {
       res.json({ error: err?.message ?? err });
     }
   },
+  
   login: async (req: OpineRequest, res: OpineResponse) => {
     const { user, password } = req.body;
     try {
@@ -48,6 +50,7 @@ export default {
       res.json({ error: err?.message ?? err });
     }
   },
+  
   unregister: async (req: OpineRequest, res: OpineResponse) => {
     const { user } = req.body;
     try {
