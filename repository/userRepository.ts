@@ -10,6 +10,7 @@ export default {
 
     return redis.hset(`${userKeyPrefix}${user}`, { passwordHash });
   },
+  
   updatePassword: async (user: string, passwordHash: string) => {
     const persistedPassHash: string | null = await redis.hget(`${userKeyPrefix}${user}`, 'passwordHash');
 
@@ -17,6 +18,8 @@ export default {
 
     return redis.hset(`${userKeyPrefix}${user}`, { passwordHash });
   },
+  
   login: (user: string): Promise<string | null> => redis.hget(`${userKeyPrefix}${user}`, 'passwordHash'),
+  
   unregister: (user: string) => redis.del(`${userKeyPrefix}${user}`)
 }
