@@ -1,12 +1,21 @@
-import { create, getNumericDate } from "https://deno.land/x/djwt@v2.7/mod.ts";
+import { create } from 'https://deno.land/x/djwt@v2.7/mod.ts';
+import moment from 'https://deno.land/x/momentjs@2.29.1-deno/mod.ts';
+import verifyTokenService from '../service/verifyTokenService.ts';
 
-const ONE_DAY = getNumericDate(3600 * 24)
+const ONE_HOUR = moment().add({ hours: 1 }).unix();
 
-const key = await crypto.subtle.importKey('jwk',
+export const JWS_SECRET_TOKEN = await crypto.subtle.importKey('jwk',
   { kty: 'oct', k: Deno.env.get('JWS_SECRET_TOKEN') ?? 'secret' },
-  { name: "HMAC", hash: "SHA-512" }, true, ["sign", "verify"]);
+  { name: 'HMAC', hash: 'SHA-512' }, true, ['sign', 'verify']);
 
-export const createUserToken = (user: string) =>
-  create({ alg: "HS512", typ: "JWT" }, { exp: ONE_DAY, user }, key)
+export const AUTH_PAYLOAD_KEY = 'auth_payload';
 
-export default key;
+export const createUserToken = async (user: string) =>
+({
+  expires_in: verifyTokenService.getTokenExpirationSeconds(ONE_HOUR),
+  access_token: await create(
+    { alg: 'HS512', typ: 'JWT' },
+    { exp: ONE_HOUR, user, generationId: crypto.randomUUID() },
+    JWS_SECRET_TOKEN
+  )
+});

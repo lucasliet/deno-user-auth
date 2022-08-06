@@ -1,5 +1,5 @@
 import userRepository from '../repository/userRepository.ts';
-import { hash, verify } from "https://deno.land/x/scrypt@v4.0.0/mod.ts";
+import { hash, verify } from 'https://deno.land/x/scrypt@v4.0.0/mod.ts';
 
 export default {
   register: async (user: string, password: string) => {
