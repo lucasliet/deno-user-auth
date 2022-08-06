@@ -11,7 +11,7 @@ function WelcomePage() {
   return withStyles(css)(
     <html>
       <head>
-        <title>Deno Middleware</title>
+        <title>Deno User Authentication</title>
       </head>
       <body>
         <main>
