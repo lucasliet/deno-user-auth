@@ -8,9 +8,11 @@ export default {
   },
   async updatePassword(user: string, password: string) {
     if (await this.login(user, password)) {
+      console.info(`user ${user} found, updating password`);
       const passwordHash = hash(password);
       return await userRepository.updatePassword(user, passwordHash);
     } else {
+      console.info(`user ${user} not found or password is incorrect`);
       return false;
     }
   },
@@ -22,6 +24,7 @@ export default {
     if (await this.login(user, password)) {
       return userRepository.unregister(user);
     } else {
+      console.info(`user ${user} not found or password is incorrect`);
       return false;
     }
   }

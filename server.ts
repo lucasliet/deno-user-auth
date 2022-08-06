@@ -8,7 +8,7 @@ app.use(json());
 app.get('/', (_, res) => res.json({ message: 'welcome!' }));
 
 app.post('/register', userController.register);
-app.post('/update_password', userController.updatePassword);
+app.put('/update_password', userController.updatePassword);
 app.post('/login', userController.login);
 app.post('/unregister', userController.unregister);
 
