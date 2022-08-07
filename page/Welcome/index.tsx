@@ -5,7 +5,7 @@
 /// <reference lib='deno.ns' />
 import { h, renderSSR, withStyles } from 'https://deno.land/x/nano_jsx@v0.0.33/mod.ts';
 
-const css = new TextDecoder().decode(await Deno.readFile('./page/styles.css'));
+const css = new TextDecoder().decode(await Deno.readFile('./page/Welcome/styles.css'));
 
 const repoURL = 'https://github.com/lucasliet/deno-user-auth';
 const insomniaImportUrl = 'insomnia://app/import?uri=https://raw.githubusercontent.com/lucasliet/deno-user-auth/master/.github/Insomnia_2022-08-06.yaml';
@@ -23,9 +23,8 @@ function WelcomePage() {
         <meta charset='UTF-8'/>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
-        <link rel="shortcut icon" href="https://deno.land/favicon.ico" type="image/x-icon" />
-        <link rel='icon' href='https://deno.land/favicon.ico' sizes='32x32' />
-        <link rel='icon' href='https://deno.land/logo.svg' type='image/svg+xml'/>
+        <link rel='icon' href='/favicon.ico' sizes='32x32' />
+        <link rel='icon' href='/logo.svg' type='image/svg+xml'/>
         <title>Deno User Authentication</title>
       </head>
       <body>
