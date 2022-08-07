@@ -18,7 +18,7 @@ export default {
       res.json({ error: err?.message ?? err });
     }
   },
-  
+
   updatePassword: async (req: OpineRequest, res: OpineResponse) => {
     const { user, password } = req.body;
     try {
@@ -34,13 +34,14 @@ export default {
       res.json({ error: err?.message ?? err });
     }
   },
-  
+
   login: async (req: OpineRequest, res: OpineResponse) => {
     const { user, password } = req.body;
     try {
-      if (await userService.login(user, password)) {
+      const userId = await userService.login(user, password);
+      if (userId) {
         res.status = 200;
-        res.json(await createUserToken(user));
+        res.json(await createUserToken({ id: userId, name: user }));
       }
       res.status = 400;
       res.json({ message: 'user or password invalid!' });
@@ -50,7 +51,7 @@ export default {
       res.json({ error: err?.message ?? err });
     }
   },
-  
+
   unregister: async (req: OpineRequest, res: OpineResponse) => {
     const { user } = req.body;
     try {

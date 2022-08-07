@@ -2,24 +2,36 @@ import redis from '../config/redisConfig.ts';
 
 const userKeyPrefix = 'user-';
 
+interface UserData {
+  id: string;
+  passwordHash: string;
+}
+
 export default {
   register: async (user: string, passwordHash: string) => {
-    const persistedPassHash: string | null = await redis.hget(`${userKeyPrefix}${user}`, 'passwordHash');
+    const persistedData: UserData | null = await redis.hget(`${userKeyPrefix}${user}`, 'UserData');
 
-    if (persistedPassHash) throw Error('user already exists');
+    if (persistedData) throw Error('user already exists');
 
-    return redis.hset(`${userKeyPrefix}${user}`, { passwordHash });
+    const UserData = {
+      id: crypto.randomUUID(),
+      passwordHash
+    };
+
+    return redis.hset(`${userKeyPrefix}${user}`, { UserData });
   },
-  
+
   updatePassword: async (user: string, passwordHash: string) => {
-    const persistedPassHash: string | null = await redis.hget(`${userKeyPrefix}${user}`, 'passwordHash');
+    const persistedData: UserData | null = await redis.hget(`${userKeyPrefix}${user}`, 'UserData');
 
-    if (!persistedPassHash) throw Error('user doesn\'t exists');
+    if (!persistedData) throw Error('user doesn\'t exists');
 
-    return redis.hset(`${userKeyPrefix}${user}`, { passwordHash });
+    const UserData = { ...persistedData, passwordHash };
+
+    return redis.hset(`${userKeyPrefix}${user}`, { UserData });
   },
-  
-  login: (user: string): Promise<string | null> => redis.hget(`${userKeyPrefix}${user}`, 'passwordHash'),
-  
+
+  login: (user: string): Promise<UserData | null> => redis.hget(`${userKeyPrefix}${user}`, 'UserData'),
+
   unregister: (user: string) => redis.del(`${userKeyPrefix}${user}`)
 }

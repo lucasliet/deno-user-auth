@@ -101,7 +101,10 @@ Simple user CRUD to use as a POC to [Deno Deploy](https://deno.com/deploy) with 
   ```JSON
   {
     "expires_in": 3546,
-    "user": "userName"
+    "user": {
+      "id": "57b55019-9523-4cd8-99c0-403eaac35e95",
+      "name": "teste"
+    }
   }
   ```
   > expires_in represents token expiration in seconds

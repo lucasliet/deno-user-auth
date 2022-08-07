@@ -10,7 +10,7 @@ export const JWS_SECRET_TOKEN = await crypto.subtle.importKey('jwk',
 
 export const AUTH_PAYLOAD_KEY = 'auth_payload';
 
-export const createUserToken = async (user: string) =>
+export const createUserToken = async (user: { id: string; name: string }) =>
 ({
   expires_in: verifyTokenService.getTokenExpirationSeconds(ONE_HOUR),
   access_token: await create(
