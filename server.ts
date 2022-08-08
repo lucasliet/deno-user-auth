@@ -9,7 +9,7 @@ const app = opine();
 
 app.use(json());
 
-app.use(serveStatic(join(dirname(import.meta.url), 'page', 'assets')));
+app.use(serveStatic(join(dirname(import.meta.url), 'page', 'static')));
 
 app.get('/', (_, res) => res.send(welcomePage()))
 

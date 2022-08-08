@@ -4,6 +4,7 @@
   --text-link-highlight: #7fffd4;
   --text-primary: #fff;
   --text-secondary: #505750;
+  --vh: 100vh;
 }
 
 * {
@@ -27,10 +28,10 @@ a {
 body {
   background-color: var(--background);
   color: var(--text-primary);
-  min-height: 100vh;
+  min-height: var(--vh);
 }
 
-main, header, footer, section {
+main, section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,10 +41,8 @@ main, header, footer, section {
 }
 
 header, footer {
+  display: flex;
   color: var(--text-secondary);
-}
-
-header, footer {
   height: 0;
   position: absolute;
 }
