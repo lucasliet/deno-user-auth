@@ -7,6 +7,7 @@ import { h, renderSSR, withStyles } from 'https://deno.land/x/nano_jsx@v0.0.33/m
 
 const css = new TextDecoder().decode(await Deno.readFile('./page/Welcome/styles.css'));
 
+const myGithubURL = 'https://github.com/lucasliet';
 const repoURL = 'https://github.com/lucasliet/deno-user-auth';
 const insomniaImportUrl = 'insomnia://app/import?uri=https://raw.githubusercontent.com/lucasliet/deno-user-auth/master/.github/Insomnia_2022-08-06.yaml';
 
@@ -26,7 +27,6 @@ function WelcomePage() {
         <link rel='icon' href='/favicon.ico' sizes='32x32'/>
         <link rel='icon' href='/logo.svg' type='image/svg+xml'/>
         <title>Deno User Authentication</title>
-        <script src='/setViewHeight.js' defer/>
       </head>
       <body>
         <header>
@@ -42,7 +42,7 @@ function WelcomePage() {
         </main>
         <footer>
           {name && avatar_url &&
-            <span>made by <img src={avatar_url} /> <strong>{name}</strong></span>
+            <span>made by <a href={myGithubURL}> <img src={avatar_url} /> <strong>{name}</strong></a></span>
           }
         </footer>
       </body>
