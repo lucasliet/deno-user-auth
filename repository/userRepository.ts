@@ -1,4 +1,4 @@
-import { compressObject, decompressObject } from '../util/compressUtil.ts';
+import { compressObject, decompressObject } from "https://deno.land/x/textcompress@v1.0.0/mod.ts";
 
 interface UserData {
   id: string;
