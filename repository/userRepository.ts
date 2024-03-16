@@ -1,37 +1,36 @@
-import redis from '../config/redisConfig.ts';
-
-const userKeyPrefix = 'user-';
-
+const userKeyPrefix = 'deno-auth-user';
 interface UserData {
   id: string;
   passwordHash: string;
 }
 
+const kv = await Deno.openKv();
+
 export default {
   register: async (user: string, passwordHash: string) => {
-    const persistedData: UserData | null = await redis.hget(`${userKeyPrefix}${user}`, 'UserData');
+    const persistedData: UserData = await kv.get<UserData>([userKeyPrefix, user]).value;
 
     if (persistedData) throw Error('user already exists');
 
-    const UserData = {
+    const userData = {
       id: crypto.randomUUID(),
       passwordHash
     };
 
-    return redis.hset(`${userKeyPrefix}${user}`, { UserData });
+    return await kv.set([userKeyPrefix, user], userData).ok;
   },
 
   updatePassword: async (user: string, passwordHash: string) => {
-    const persistedData: UserData | null = await redis.hget(`${userKeyPrefix}${user}`, 'UserData');
+    const persistedData: UserData = await kv.get<UserData>([userKeyPrefix, user]).value;
 
     if (!persistedData) throw Error('user doesn\'t exists');
 
-    const UserData = { ...persistedData, passwordHash };
+    const userData = { ...persistedData, passwordHash };
 
-    return redis.hset(`${userKeyPrefix}${user}`, { UserData });
+    return await kv.set([userKeyPrefix, user], userData).ok;
   },
 
-  login: (user: string): Promise<UserData | null> => redis.hget(`${userKeyPrefix}${user}`, 'UserData'),
+  login: async (user: string): Promise<UserData | null> => await kv.get<UserData>([userKeyPrefix, user]).value,
 
-  unregister: (user: string) => redis.del(`${userKeyPrefix}${user}`)
+  unregister: async (user: string) => await kv.delete([userKeyPrefix, user])
 }
