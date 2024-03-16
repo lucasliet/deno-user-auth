@@ -1,14 +1,16 @@
-const userKeyPrefix = 'deno-auth-user';
+import { compressObject, decompressObject } from '../util/compressUtil.ts';
+
 interface UserData {
   id: string;
   passwordHash: string;
 }
 
+const userKeyPrefix = 'deno-auth-user';
 const kv = await Deno.openKv();
 
 export default {
   register: async (user: string, passwordHash: string) => {
-    const persistedData: UserData = (await kv.get<UserData>([userKeyPrefix, user])).value;
+    const persistedData: string = (await kv.get<string>([userKeyPrefix, user])).value;
 
     if (persistedData) throw Error('user already exists');
 
@@ -17,20 +19,32 @@ export default {
       passwordHash
     };
 
-    return (await kv.set([userKeyPrefix, user], userData)).ok;
+    const compressedUserData: string = compressObject(userData);
+
+    return (await kv.set([userKeyPrefix, user], compressedUserData)).ok;
   },
 
   updatePassword: async (user: string, passwordHash: string) => {
-    const persistedData: UserData = (await kv.get<UserData>([userKeyPrefix, user])).value;
+    const compressedUserData = (await kv.get<string>([userKeyPrefix, user])).value;
 
-    if (!persistedData) throw Error('user doesn\'t exists');
+    if (!compressedUserData) throw Error('user doesn\'t exists');
+
+    const persistedData = decompressObject<UserData>(compressedUserData);
 
     const userData = { ...persistedData, passwordHash };
 
-    return (await kv.set([userKeyPrefix, user], userData)).ok;
+    const updatedCompressedUserData: string = compressObject(userData);
+
+    return (await kv.set([userKeyPrefix, user], updatedCompressedUserData)).ok;
   },
 
-  login: async (user: string): Promise<UserData | null> => (await kv.get<UserData>([userKeyPrefix, user])).value,
+  login: async (user: string): Promise<UserData | null> => {
+    const compressedData = (await kv.get<string>([userKeyPrefix, user])).value;
+
+    if (!compressedData) return null;
+
+    return decompressObject<UserData>(compressedData);
+  },
 
   unregister: async (user: string) => await kv.delete([userKeyPrefix, user])
 }
