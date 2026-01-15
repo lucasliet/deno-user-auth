@@ -8,6 +8,29 @@ import welcomePage from './page/Welcome/index.tsx';
 
 const app = opine();
 
+// Middleware de logging
+app.use(async (req, _, next) => {
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log(`${req.method} ${req.url} - ${ms}ms`);
+});
+
+// Middleware para servir o robots.txt
+app.use(async (req, res, next) => {
+  if (req.url === '/robots.txt') {
+    try {
+      const robotsTxt = await Deno.readTextFile('./static/robots.txt');
+      res.type('text/plain').send(robotsTxt);
+    } catch (_error) {
+      res.status = 200;
+      res.type('text/plain').send('User-agent: *\nDisallow: /');
+    }
+  } else {
+    await next();
+  } 
+});
+
 app.use(opineCors());
 app.use(json());
 
